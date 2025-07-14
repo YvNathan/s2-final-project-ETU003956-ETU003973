@@ -48,10 +48,16 @@ $categories = charger_liste_categories();
             <p class="text-muted">Système de gestion des objets empruntables</p>
         </div>
 
-        <div class="d-flex justify-content-end mb-4">
-            <a href="traitements/deconnexion.php" class="btn btn-outline-danger">Se déconnecter</a>
-        </div>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start mb-4">
+                <a href="ajout.php" class="btn btn-outline-primary">Ajouter un objet</a>
+            </div>
 
+            <div class="d-flex justify-content-end mb-4">
+                <a href="traitements/deconnexion.php" class="btn btn-outline-danger">Se déconnecter</a>
+            </div>
+        </div>
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <form action="objets.php" method="get" class="d-flex align-items-center gap-3">
                 <label for="choix" class="form-label mb-0">Filtrer par catégorie :</label>
@@ -73,7 +79,7 @@ $categories = charger_liste_categories();
                     <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="card shadow-sm h-100">
                             <div class="position-relative">
-                                <img src="../assets/images/<?= $o['nom_image']?>" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
+                                <img src="../assets/images/<?= $o['nom_image'] ?>" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
                             </div>
                             <div class="mt-2 position-absolute">
                                 <span class="ms-3 badge bg-primary"><a href="ficheObjet.php?o=<?= $o['id_objet']?>"><?= $o['nom_categorie'] ?></a></span>
