@@ -100,12 +100,6 @@ SELECT o.id_objet, o.nom_objet, o.id_categorie, c.nom_categorie
 FROM s2fp_objet as o
 JOIN s2fp_categorie_objet as c ON o.id_categorie = c.id_categorie;
 
-CREATE OR REPLACE VIEW v_s2fp_liste_emprunts as
-SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.email, m.image_profil
-FROM s2fp_emprunt as e
-JOIN v_s2fp_liste_objets_img as o ON e.id_objet = o.id_objet
-JOIN s2fp_membre as m ON e.id_membre = m.id_membre;
-
 CREATE OR REPLACE VIEW v_s2fp_objet_premier_img AS
 SELECT 
     id_objet,
@@ -118,6 +112,13 @@ SELECT v.*, coalesce(ipm.id_image, 0) as id_image, coalesce(im.nom_image, 'defau
 FROM v_s2fp_liste_objets v
 LEFT JOIN v_s2fp_objet_premier_img ipm ON v.id_objet = ipm.id_objet
 LEFT JOIN s2fp_image_objet im ON ipm.id_image = im.id_image;
+
+
+CREATE OR REPLACE VIEW v_s2fp_liste_emprunts as
+SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.email, m.image_profil
+FROM s2fp_emprunt as e
+JOIN v_s2fp_liste_objets_img as o ON e.id_objet = o.id_objet
+JOIN s2fp_membre as m ON e.id_membre = m.id_membre;
 
 CREATE OR REPLACE VIEW v_s2fp_liste_objets_membre as
 SELECT lo.*, m.id_membre, m.nom 
