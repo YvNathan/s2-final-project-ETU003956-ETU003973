@@ -60,6 +60,13 @@
                                 <button type="submit" class="btn btn-primary">Créer le compte</button>
                             </div>
                         </form>
+
+                        <div class="row mt-4">
+                            <p class="text-center text_muted">Vous avez déjà un compte</p>
+                            <a href="login.php" class="btn btn-success">Se connecter</a>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

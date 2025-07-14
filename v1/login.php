@@ -16,7 +16,7 @@
                 <div class="card shadow mt-5">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Connexion à Tairo Ampiasaiko</h2>
-                        
+
                         <?php if (isset($_GET['erreur'])) {
                             $erreur = $_GET['erreur'];
                             if ($erreur == 1) { ?>
@@ -25,7 +25,7 @@
                                 </div>
                         <?php }
                         } ?>
-                        
+
                         <form action="traitements/traitement-login.php" method="post">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Adresse e-mail</label>
@@ -39,6 +39,11 @@
                                 <button type="submit" class="btn btn-primary">Se connecter</button>
                             </div>
                         </form>
+
+                        <div class="row mt-4">
+                            <p class="text-center text_muted">Vous n'avez pas de compte ?</p>
+                            <a href="inscription.php" class="btn btn-success">S'inscrire</a>
+                        </div>
                     </div>
                 </div>
             </div>
