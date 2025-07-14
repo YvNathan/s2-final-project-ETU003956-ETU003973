@@ -104,4 +104,4 @@ CREATE OR REPLACE VIEW v_s2fp_liste_emprunts as
 SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.email, m.image_profil
 FROM s2fp_emprunt as e
 JOIN v_s2fp_liste_objets as o ON e.id_objet = o.id_objet
-JOIN s2fp_membre as m ON e.id_membre = m.id_membre; 
+JOIN s2fp_membre as m ON e.id_membre = m.id_membre;

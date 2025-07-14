@@ -1,5 +1,6 @@
 <?php
 require('../include/fonctions.php');
+session_start();
 
 if (!isset($_GET['choix'])) {
     $liste = charger_liste_objets();
@@ -18,96 +19,72 @@ $categories = charger_liste_categories();
     <title>S2-Final-project</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-        }
 
-        .card-link:hover {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            transition: transform 0.3s ease;
-        }
-
-        .card-img-top {
-            border-top-left-radius: 0.375rem;
-            border-top-right-radius: 0.375rem;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container mt-4">
-        <div class="container text-center mt-5">
-            <h1 class="display-4 fw-bold text-dark mb-3">Liste des Objets</h1>
-            <p class="text-muted">Système de gestion des objets empruntables</p>
-        </div>
-
-        <div class="d-flex justify-content-end mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Listes des Objets</h2>
+            <p class="mb-0">Bonjour <?= $_SESSION['nom']?></p>
             <a href="traitements/deconnexion.php" class="btn btn-outline-danger">Se déconnecter</a>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <form action="objets.php" method="get" class="d-flex align-items-center gap-3">
-                <label for="choix" class="form-label mb-0">Filtrer par catégorie :</label>
-                <select name="choix" id="choix" class="form-select" style="width: auto;">
-                    <?php foreach ($categories as $c) { ?>
-                        <option value="<?= $c['id_categorie'] ?>"><?= $c['nom_categorie'] ?></option>
-                    <?php } ?>
-                </select>
-                <input type="submit" value="Filtrer" class="btn btn-primary">
-                <?php if (isset($_GET['choix'])) { ?>
-                    <a href="objets.php" class="btn btn-secondary">Enlever filtre</a>
-                <?php } ?>
-            </form>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="objets.php" method="get" class="row g-3 align-items-end">
+                    <div class="col-md-8">
+                        <label for="choix" class="form-label">Filtrer par catégorie</label>
+                        <select name="choix" id="choix" class="form-select">
+                            <?php foreach ($categories as $c) { ?>
+                                <option value="<?= $c['id_categorie'] ?>"><?= $c['nom_categorie'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" value="Filtrer" class="btn btn-primary">
+                        <?php if (isset($_GET['choix'])) { ?>
+                            <a href="objets.php" class="btn btn-secondary ms-2">Enlever filtre</a>
+                        <?php } ?>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div class="py-5">
-            <div class="row g-4">
-                <?php foreach ($liste as $o) { ?>
-                    <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
-                        <div class="card shadow-sm h-100">
-                            <div class="position-relative">
-                                <img src="https://via.placeholder.com/300x200?text=Objet" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
-                            </div>
-                            <div class="mt-2 position-absolute">
-                                <span class="ms-3 badge bg-primary"><?= $o['nom_categorie'] ?></span>
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold"><?= $o['nom_objet'] ?></h5>
-                                <p class="card-text text-muted mb-3">
-                                    <i class="bi bi-tag"></i> Catégorie: <?= $o['nom_categorie'] ?>
-                                </p>
-                                <div class="mt-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nom Objet</th>
+                                <th>Categorie</th>
+                                <th>Date Emprunt</th>
+                                <th>Date Retour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($liste as $o) { ?>
+                                <tr>
+                                    <td><?= $o['nom_objet'] ?></td>
+                                    <td><?= $o['nom_categorie'] ?></td>
                                     <?php if (is_array($emprunt = retrouver_dans_emprunts($o['id_objet']))) { ?>
-                                        <div class="d-flex flex-wrap gap-2">
-                                            <span class="badge bg-info">
-                                                <i class="bi bi-calendar-check"></i> Emprunté le: <?= $emprunt['date_emprunt'] ?>
-                                            </span>
-                                            <span class="badge bg-warning">
-                                                <i class="bi bi-calendar-x"></i> Retour: <?= $emprunt['date_retour'] ?>
-                                            </span>
-                                        </div>
+                                        <td><span class="badge bg-info"><?= $emprunt['date_emprunt'] ?></span></td>
+                                        <td><span class="badge bg-warning"><?= $emprunt['date_retour'] ?></span></td>
                                     <?php } else { ?>
-                                        <span class="badge bg-success">
-                                            <i class="bi bi-check-circle"></i> Disponible
-                                        </span>
+                                        <td><span class="text-muted">-</span></td>
+                                        <td><span class="text-muted">-</span></td>
                                     <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
