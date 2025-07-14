@@ -119,7 +119,7 @@ function charger_histo_emprunts($id_objet)
 function charger_fiche_membre($id_membre)
 {
     $sql = "SELECT *
-            FROM v_s2fp_liste_membre
+            FROM v_s2fp_liste_objets_membre
             WHERE id_membre = %d";
     $sql = sprintf($sql, $id_membre);
     $requete = mysqli_query(dbconnect(), $sql);
