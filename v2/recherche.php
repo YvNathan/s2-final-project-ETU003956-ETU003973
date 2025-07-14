@@ -1,6 +1,6 @@
 <?php
 require("../include/fonctions.php");
-$categories = chargerCategories(); // Fonction pour charger les catégories (à créer séparément)
+$categories = charger_liste_categories();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
