@@ -83,7 +83,7 @@ function charger_liste_filtree($id_categorie)
 function charger_fiche_objet($id_objet)
 {
     $sql = "SELECT * 
-            FROM v_s2fp_liste_objets_img 
+            FROM v_s2fp_objet_fulls_details 
             WHERE id_objet = %d";
     $sql = sprintf($sql, $id_objet);
     $requete = mysqli_query(dbconnect(), $sql);
@@ -214,11 +214,11 @@ function ajouter_image($img, $id_objet)
 
 function recuperer_dernier_id()
 {
-    $sql = "SELECT LAST_INSERT_ID";
+    $sql = "SELECT LAST_INSERT_ID() as id";
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = mysqli_fetch_assoc($requete);
     mysqli_free_result($requete);
-    return $resultat;
+    return $resultat['id'];
 }
 
 function charger_images_objet($id_objet)

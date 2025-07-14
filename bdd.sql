@@ -125,6 +125,10 @@ SELECT lo.*, m.id_membre, m.nom
 FROM v_s2fp_liste_objets as lo JOIN s2fp_objet as o ON lo.id_objet = o.id_objet
 JOIN s2fp_membre as m ON o.id_membre = m.id_membre;
 
+CREATE OR REPLACE VIEW v_s2fp_objet_fulls_details as
+SELECT loi.*, lom.id_membre, lom.nom
+FROM v_s2fp_liste_objets_img as loi JOIN v_s2fp_liste_objets_membre as lom ON loi.id_objet = lom.id_objet;
+
 CREATE OR REPLACE VIEW v_s2fp_objet_toutes_images AS
 SELECT 
     o.id_objet,

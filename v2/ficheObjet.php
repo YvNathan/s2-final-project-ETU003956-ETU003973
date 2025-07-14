@@ -1,5 +1,6 @@
 <?php
 require('../include/fonctions.php');
+session_start();
 $objet = $_GET['o'];
 $fiche = charger_fiche_objet($objet);
 $histo = charger_histo_emprunts($objet);
@@ -8,6 +9,7 @@ $images = charger_images_objet($objet);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,6 +41,7 @@ $images = charger_images_objet($objet);
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-4">
         <div class="container text-center mt-5">
@@ -55,21 +58,23 @@ $images = charger_images_objet($objet);
             </div>
         </div>
 
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <h5 class="card-title fw-bold">Ajouter des photos</h5>
-                <form action="traitements/traitement-ajout-photo.php" method="post" enctype="multipart/form-data" class="row g-3">
-                    <input type="hidden" name="id_objet" value="<?= $fiche['id_objet'] ?>">
-                    <div class="col-md-8">
-                        <input type="file" class="form-control" name="fichier[]" id="fichier" multiple accept="image/*" required>
-                        <div class="form-text">Formats acceptés : JPG, JPEG, PNG, GIF (max 25MB par image)</div>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">Ajouter les photos</button>
-                    </div>
-                </form>
+        <?php if ($fiche['id_membre'] == $_SESSION['id_membre']) { ?>
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Ajouter des photos</h5>
+                    <form action="traitements/traitement-ajout-photo.php" method="post" enctype="multipart/form-data" class="row g-3">
+                        <input type="hidden" name="id_objet" value="<?= $fiche['id_objet'] ?>">
+                        <div class="col-md-8">
+                            <input type="file" class="form-control" name="fichier[]" id="fichier" multiple accept="image/*" required>
+                            <div class="form-text">Formats acceptés : JPG, JPEG, PNG, GIF (max 25MB par image)</div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Ajouter les photos</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        <?php } ?>
 
         <div class="row">
             <div class="col-md-6">
@@ -77,7 +82,7 @@ $images = charger_images_objet($objet);
                     <div class="card-body">
                         <h5 class="card-title fw-bold">Images de l'objet</h5>
                         <div class="row g-2">
-                            <?php foreach($images as $image) { ?>
+                            <?php foreach ($images as $image) { ?>
                                 <div class="col-md-6">
                                     <img src="../assets/images/<?= $image ?>" alt="Photo objet" class="object-image">
                                 </div>
@@ -93,6 +98,7 @@ $images = charger_images_objet($objet);
                         <h5 class="card-title fw-bold">Informations</h5>
                         <p class="card-text"><strong>Nom :</strong> <?= $fiche['nom_objet'] ?></p>
                         <p class="card-text"><strong>Catégorie :</strong> <?= $fiche['nom_categorie'] ?></p>
+                        <p class="card-text"><strong>Propriétaire :</strong> <?= $fiche['nom'] ?></strong></p>
                         <?php if (is_array($emprunt = retrouver_dans_emprunts($fiche['id_objet']))) { ?>
                             <div class="d-flex flex-wrap gap-2">
                                 <span class="badge bg-info">
@@ -127,9 +133,9 @@ $images = charger_images_objet($objet);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($histo as $h) { ?>
+                                    <?php foreach ($histo as $h) { ?>
                                         <tr>
-                                            <td><?= $h['nom'] ?></td> 
+                                            <td><?= $h['nom'] ?></td>
                                             <td><?= $h['date_emprunt'] ?></td>
                                             <td><?= $h['date_retour'] ?></td>
                                         </tr>
@@ -145,4 +151,5 @@ $images = charger_images_objet($objet);
         </div>
     </div>
 </body>
+
 </html>

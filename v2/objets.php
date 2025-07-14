@@ -38,6 +38,10 @@ $categories = charger_liste_categories();
             border-top-left-radius: 0.375rem;
             border-top-right-radius: 0.375rem;
         }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 
@@ -97,10 +101,7 @@ $categories = charger_liste_categories();
                                 </span>
                             </div>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold"><a href="ficheObjet.php?o=<?= $o['id_objet'] ?>"><?= $o['nom_objet'] ?></a></h5>
-                                <p class="card-text text-muted mb-3">
-                                    <i class="bi bi-tag"></i> Catégorie: <?= $o['nom_categorie'] ?>
-                                </p>
+                                <h5 class="card-title fw-bold"><a href="ficheObjet.php?o=<?= $o['id_objet'] ?>"><?= $o['nom_objet'] ?></a></h5> 
                                 <div class="mt-auto">
                                     <?php if (is_array($emprunt = retrouver_dans_emprunts($o['id_objet']))) { ?>
                                         <div class="d-flex flex-wrap gap-2">
