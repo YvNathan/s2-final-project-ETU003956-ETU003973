@@ -12,8 +12,12 @@ Version 1
         - images_objet(id_image, id_objet, nom_image) (ok) (Nathan)
         - emprunt(id_emprunt, id_objet, id_membre, date_emprunt, date_retour) (ok) (Nathan)
 
-    - Données :
-        - 4 membres
-        - 4 catégories (esthétique, bricolage, mécanique, cuisine)
-        - 10 objets par membre
-        - 10 emprunts
+    - Données : (ok) (Florencia)
+        - 4 membres (ok) (Florencia)
+        - 4 catégories (esthétique, bricolage, mécanique, cuisine) (ok) (Florencia)
+        - 10 objets par membre (ok) (Florencia)
+        - 10 emprunts (ok) (Florencia)
+- Créer les pages:
+     - login (ok) (Florencia)
+     - inscription (ok) (Florencia)
+     - liste des objets 
