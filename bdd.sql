@@ -105,3 +105,16 @@ SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.e
 FROM s2fp_emprunt as e
 JOIN v_s2fp_liste_objets as o ON e.id_objet = o.id_objet
 JOIN s2fp_membre as m ON e.id_membre = m.id_membre;
+
+CREATE OR REPLACE VIEW v_s2fp_objet_premier_img AS
+SELECT 
+    id_objet,
+    MIN(id_image) AS id_image
+FROM s2fp_image_objet
+GROUP BY id_objet;
+
+CREATE OR REPLACE VIEW v_s2fp_liste_objets_img AS
+SELECT v.*, coalesce(ipm.id_image, 0) as id_image, coalesce(im.nom_image, 'default.png') as nom_image
+FROM v_s2fp_liste_objets v
+LEFT JOIN v_s2fp_objet_premier_img ipm ON v.id_objet = ipm.id_objet
+LEFT JOIN s2fp_image_objet im ON ipm.id_image = im.id_image;

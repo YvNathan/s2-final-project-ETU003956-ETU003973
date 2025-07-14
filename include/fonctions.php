@@ -23,7 +23,7 @@ function login($email, $mdp)
 
 function charger_liste_objets()
 {
-    $sql = "SELECT * FROM v_s2fp_liste_objets";
+    $sql = "SELECT * FROM v_s2fp_liste_objets_img";
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = array();
     while ($o = mysqli_fetch_assoc($requete)) {
@@ -69,7 +69,7 @@ function charger_liste_categories()
 
 function charger_liste_filtree($id_categorie)
 {
-    $sql = "SELECT * FROM v_s2fp_liste_objets WHERE id_categorie = %d";
+    $sql = "SELECT * FROM v_s2fp_liste_objets_img WHERE id_categorie = %d";
     $sql = sprintf($sql, $id_categorie);
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = array();

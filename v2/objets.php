@@ -73,7 +73,7 @@ $categories = charger_liste_categories();
                     <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="card shadow-sm h-100">
                             <div class="position-relative">
-                                <img src="https://via.placeholder.com/300x200?text=Objet" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
+                                <img src="../assets/images/<?= $o['nom_image']?>" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
                             </div>
                             <div class="mt-2 position-absolute">
                                 <span class="ms-3 badge bg-primary"><?= $o['nom_categorie'] ?></span>
