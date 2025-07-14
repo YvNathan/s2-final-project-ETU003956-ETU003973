@@ -109,9 +109,13 @@ JOIN s2fp_membre as m ON e.id_membre = m.id_membre;
 CREATE OR REPLACE VIEW v_s2fp_objet_premier_img AS
 SELECT 
     id_objet,
-    MIN(id_image) AS id_image
+    MIN(id_image) AS id_image,
 FROM s2fp_image_objet
 GROUP BY id_objet;
+
+CREATE OR REPLACE VIEW v_liste_membre as
+SELECT * 
+FROM s2fp_membre;
 
 CREATE OR REPLACE VIEW v_s2fp_liste_objets_img AS
 SELECT v.*, coalesce(ipm.id_image, 0) as id_image, coalesce(im.nom_image, 'default.png') as nom_image

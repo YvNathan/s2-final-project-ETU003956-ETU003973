@@ -15,10 +15,17 @@ $fiche = charger_fiche_membre($membre);
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    <img src="../assets/images/<?= $fiche['image_profil'] ?>" alt="">
+    <h2>Détails sur <?= $fiche['nom'] ?></h2>
     <?php
-        foreach($fiche as $f){
-            
-        }
-    ?>
+        foreach($fiche as $f){?>
+            <tr>
+                <td><?= $f['nom']?></td>
+                <td><?= $f['date_naissance']?></td>
+                <td><?= $f['genre']?></td>
+                <td><?= $f['ville']?></td>
+                <td><?= $f['email']?></td>
+            </tr>
+    <?php } ?>
 </body>
 </html>
