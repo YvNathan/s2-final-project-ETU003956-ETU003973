@@ -47,7 +47,7 @@ function charger_liste_emprunts()
 
 function retrouver_dans_emprunts($idObjet)
 {
-    $sql = "SELECT * FROM v_s2fp_liste_emprunts WHERE id_objet = %d";
+    $sql = "SELECT * FROM v_s2fp_liste_emprunts WHERE id_objet = %d AND date_retour > NOW() ";
     $sql = sprintf($sql, $idObjet);
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = mysqli_fetch_assoc($requete);
@@ -116,7 +116,8 @@ function charger_histo_emprunts($id_objet)
     return $resultat;
 }
 
-function charger_liste_membres() {
+function charger_liste_membres()
+{
     $sql = "SELECT * FROM s2fp_membre ORDER BY nom";
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = array();
@@ -127,32 +128,34 @@ function charger_liste_membres() {
     return $resultat;
 }
 
-function charger_infos_membre($id_membre) {
+function charger_infos_membre($id_membre)
+{
     $sql = "SELECT * FROM s2fp_membre WHERE id_membre = %d";
     $sql = sprintf($sql, $id_membre);
     $requete = mysqli_query(dbconnect(), $sql);
     if (!$requete) {
         return false;
     }
-    
+
     $resultat = mysqli_fetch_assoc($requete);
     mysqli_free_result($requete);
     return $resultat;
 }
 
-function charger_emprunts_membre($id_membre) {
+function charger_emprunts_membre($id_membre)
+{
     $sql = "SELECT * FROM v_s2fp_liste_emprunts WHERE id_membre = %d";
     $sql = sprintf($sql, $id_membre);
     $requete = mysqli_query(dbconnect(), $sql);
     if (!$requete) {
         return array();
     }
-    
+
     $resultat = array();
     while ($emprunt = mysqli_fetch_assoc($requete)) {
         $resultat[] = $emprunt;
     }
-    
+
     mysqli_free_result($requete);
     return $resultat;
 }
@@ -252,4 +255,12 @@ function rechercher_objet($categorie, $nom, $dispo)
     }
     mysqli_free_result($requete);
     return $resultat;
+}
+
+function emprunter_objet($id_objet, $id_membre, $duree)
+{
+    $sql = "INSERT INTO s2fp_emprunt (id_objet, id_membre, date_emprunt, date_retour)
+         VALUES (%d, %d, NOW(), DATE_ADD(NOW(), INTERVAL %d DAY))";
+    $sql = sprintf($sql, $id_objet, $id_membre, $duree);
+    mysqli_query(dbconnect(), $sql);
 }

@@ -43,7 +43,7 @@ $images = charger_images_objet($objet);
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4 min-vh-100">
         <div class="container text-center mt-5">
             <h1 class="display-4 fw-bold text-dark mb-3">Détails sur <?= $fiche['nom_objet'] ?></h1>
             <p class="text-muted">Informations détaillées de l'objet</p>

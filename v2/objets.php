@@ -109,13 +109,19 @@ $categories = charger_liste_categories();
                                                 <i class="bi bi-calendar-check"></i> Emprunté le: <?= $emprunt['date_emprunt'] ?>
                                             </span>
                                             <span class="badge bg-warning">
-                                                <i class="bi bi-calendar-x"></i> Retour: <?= $emprunt['date_retour'] ?>
+                                                <i class="bi bi-calendar-x"></i> Disponible le : <?= $emprunt['date_retour'] ?>
                                             </span>
                                         </div>
                                     <?php } else { ?>
-                                        <span class="badge bg-success">
-                                            <i class="bi bi-check-circle"></i> Disponible
-                                        </span>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-check-circle"></i> Disponible
+                                            </span>
+                                            <form action="emprunt.php" method="post">
+                                                <input type="hidden" name="id_objet" value="<?= $o['id_objet']?>">
+                                                <input type="submit" value="Emprunter" class="btn btn-outline-secondary">
+                                            </form>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>

@@ -27,7 +27,7 @@ $categories = charger_liste_categories();
     <header class="fixed">
         <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 px-4">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold me-4" href="index.php">Test Co Enterprise</a>
+                <a class="navbar-brand fw-bold me-4" href="index.php">Tairo ampiasaiko</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
