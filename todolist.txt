@@ -21,3 +21,17 @@ Version 1
      - login (ok) (Florencia)
      - inscription (ok) (Florencia)
      - liste des objets 
+
+Version 2:
+    - Amélioration du design:
+    - Ajout d'un nouvel objet par un membre 
+    - Page fiche objet : 
+        - image 
+        - historique d'emprunts
+    - Recherche avec :
+        - categorie
+        - nom objet
+        - disponibilité
+    - Page fiche membre : 
+        - infos sur le membre
+        - les objets du membre
