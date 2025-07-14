@@ -37,7 +37,7 @@ $categories = charger_liste_categories();
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Home</a>
+                            <a class="nav-link" href="objets.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="recherche.php">Recherche</a>
