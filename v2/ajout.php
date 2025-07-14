@@ -49,14 +49,14 @@ $categorie = charger_liste_categories();
 
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-10">
-                <form action="./traitements/traitement-upload.php" method="post" enctype="multipart/form-data">
+                <form action="./traitements/traitement-ajout-obj.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nom_objet" class="form-label">Objet :</label>
                         <input type="text" name="nom_objet" id="nom_objet" class="form-control" placeholder="Nom de votre objet" required>
                     </div>
                     <div class="mb-3">
                         <label for="choix_categorie" class="form-label">Catégorie :</label>
-                        <select name="choix_categorie" id="choix_categorie" class="form-select">
+                        <select name="choix_categorie" id="choix_categorie" class="form-select" required>
                             <?php foreach ($categorie as $c) { ?>
                                 <option value="<?= $c['id_categorie'] ?>"><?= $c['nom_categorie'] ?></option>
                             <?php } ?>

@@ -182,3 +182,17 @@ function ajouter_objet($objet, $categorie, $id_membre){
     $sql = sprintf($sql, $objet, $categorie, $id_membre);
     mysqli_query(dbconnect(), $sql);
 }
+
+function ajouter_image($img, $id_objet){
+    $sql = "INSERT INTO s2fp_image_objet (id_objet, nom_image) VALUES (%d, '%s')";
+    $sql = sprintf($sql, $id_objet, $img);
+    mysqli_query(dbconnect(), $sql);
+}
+
+function recuperer_dernier_id(){
+    $sql = "SELECT LAST_INSERT_ID";
+    $requete = mysqli_query(dbconnect(), $sql);
+    $resultat = mysqli_fetch_assoc($requete);
+    mysqli_free_result($requete);
+    return $resultat;
+}
