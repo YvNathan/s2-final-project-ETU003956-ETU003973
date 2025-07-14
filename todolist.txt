@@ -1,0 +1,19 @@
+S2 Projet final
+
+Objectif : Créer un site de simulation d'emprunts d'objets d'objets de différentes catégories
+
+
+Version 1
+- Créer base de données :
+    - Tables :
+        - membre (id_membre, nom , date de naissance, genre, émail, ville, mdp, image_profil) (ok) (Nathan)
+        - categorie_objet (id_categorie, nom_categorie ) (ok) (Nathan)
+        - objet (id_objet , nom_objet , id_categorie, id_membre) (ok) (Nathan)
+        - images_objet(id_image, id_objet, nom_image) (ok) (Nathan)
+        - emprunt(id_emprunt, id_objet, id_membre, date_emprunt, date_retour) (ok) (Nathan)
+
+    - Données :
+        - 4 membres
+        - 4 catégories (esthétique, bricolage, mécanique, cuisine)
+        - 10 objets par membre
+        - 10 emprunts
