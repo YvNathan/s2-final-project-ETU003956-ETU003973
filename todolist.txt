@@ -19,6 +19,9 @@ Version 1
         - 10 emprunts (ok) (Florencia)
 - Créer les pages:
      - login (ok) (Florencia)
+        - fonctions: (ok) (Florencia)
+            - creer compte (ok) (Florencia)
+            - login (ok) (Florencia)
      - inscription (ok) (Florencia)
      - liste des objets 
 
