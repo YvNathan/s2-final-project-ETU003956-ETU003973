@@ -1,6 +1,6 @@
 <?php
 require("../include/fonctions.php");
-$categories = chargerCategories(); // Fonction pour charger les catégories d'objets
+$categories = rechercher_objet();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
