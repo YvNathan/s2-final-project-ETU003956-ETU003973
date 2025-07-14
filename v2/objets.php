@@ -101,7 +101,7 @@ $categories = charger_liste_categories();
                                 </span>
                             </div>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold"><a href="ficheObjet.php?o=<?= $o['id_objet'] ?>"><?= $o['nom_objet'] ?></a></h5> 
+                                <h5 class="card-title fw-bold"><a href="ficheObjet.php?o=<?= $o['id_objet'] ?>"><?= $o['nom_objet'] ?></a></h5>
                                 <div class="mt-auto">
                                     <?php if (is_array($emprunt = retrouver_dans_emprunts($o['id_objet']))) { ?>
                                         <div class="d-flex flex-wrap gap-2">
@@ -126,6 +126,14 @@ $categories = charger_liste_categories();
         </div>
     </div>
 
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-1">&copy; Copyright 2025</p>
+            <p class="mb-0">ETU003956 - ETU003973</p>
+        </div>
+    </footer>
 </body>
 
 </html>

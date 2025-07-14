@@ -7,6 +7,7 @@ $emprunts = charger_emprunts_membre($membre);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +39,7 @@ $emprunts = charger_emprunts_membre($membre);
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-4">
         <div class="container text-center mt-5">
@@ -91,7 +93,7 @@ $emprunts = charger_emprunts_membre($membre);
                     <h5 class="card-title fw-bold">Objets empruntés</h5>
                     <?php if (count($emprunts) > 0) { ?>
                         <div class="row g-3">
-                            <?php foreach($emprunts as $e) { ?>
+                            <?php foreach ($emprunts as $e) { ?>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card h-100">
                                         <div class="card-body">
@@ -114,5 +116,13 @@ $emprunts = charger_emprunts_membre($membre);
             </div>
         </div>
     </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-1">&copy; Copyright 2025</p>
+            <p class="mb-0">ETU003956 - ETU003973</p>
+        </div>
+    </footer>
 </body>
+
 </html>

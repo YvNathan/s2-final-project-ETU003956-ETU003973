@@ -18,14 +18,19 @@ $categorie = charger_liste_categories();
             font-weight: 500;
             color: #333;
         }
-        .form-control, .form-select {
+
+        .form-control,
+        .form-select {
             border-radius: 0.375rem;
             border: 1px solid #ced4da;
         }
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: #0d6efd;
             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
         }
+
         .btn-primary {
             border-radius: 0.375rem;
         }
@@ -76,6 +81,13 @@ $categorie = charger_liste_categories();
             </div>
         </div>
     </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <div class="container">
+            <p class="mb-1">&copy; Copyright 2025</p>
+            <p class="mb-0">ETU003956 - ETU003973</p>
+        </div>
+    </footer>
 </body>
 
 </html>
