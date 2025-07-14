@@ -15,7 +15,7 @@ $histo = charger_histo_emprunts($objet);
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <?= $fiche['nom_image']?>
+    <img src="../assets/images/<?= $fiche['nom_image']?>" alt="">
     <?php
         foreach($histo as $h){?>
             <?= $h['nom']?> 
