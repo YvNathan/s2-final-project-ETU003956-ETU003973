@@ -80,9 +80,10 @@ function charger_liste_filtree($id_categorie)
     return $resultat;
 }
 
-function charger_fiche_objet($id_objet){
+function charger_fiche_objet($id_objet)
+{
     $sql = "SELECT * 
-            FROM v_s2fp_liste_objets 
+            FROM v_s2fp_liste_objets_img 
             WHERE id_objet = %d";
     $sql = sprintf($sql, $id_objet);
     $requete = mysqli_query(dbconnect(), $sql);
@@ -90,18 +91,15 @@ function charger_fiche_objet($id_objet){
         return false;
     }
 
-    $resultat = array();
-    while ($fiche = mysqli_fetch_assoc($requete)) {
-        $resultat[] = $fiche;
-    }
-
+    $resultat = mysqli_fetch_assoc($requete);
     mysqli_free_result($requete);
     return $resultat;
 }
 
-function charger_histo_emprunts($id_objet){
+function charger_histo_emprunts($id_objet)
+{
     $sql = "SELECT *
-            FROM v_s2fp_liste_emrpunts
+            FROM v_s2fp_liste_emprunts
             WHERE id_objet = %d";
     $sql = sprintf($sql, $id_objet);
     $requete = mysqli_query(dbconnect(), $sql);
@@ -118,7 +116,8 @@ function charger_histo_emprunts($id_objet){
     return $resultat;
 }
 
-function charger_fiche_membre($id_membre){
+function charger_fiche_membre($id_membre)
+{
     $sql = "SELECT *
             FROM v_s2fp_liste_membre
             WHERE id_membre = %d";
@@ -135,4 +134,51 @@ function charger_fiche_membre($id_membre){
 
     mysqli_free_result($requete);
     return $resultat;
+}
+
+function uploadMedia($file, $uploadDir, $allowedMimeTypes)
+{
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    $maxSize = 25 * 1024 * 1024;
+
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        return ['resultat_upload' => false, 'message' => 'Erreur lors de l’upload : ' . $file['error']];
+    }
+
+    if ($file['size'] > $maxSize) {
+        return ['resultat_upload' => false, 'message' => 'Le fichier est trop volumineux.'];
+    }
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    if (!in_array($mime, $allowedMimeTypes)) {
+        return ['resultat_upload' => false, 'message' => 'Type de fichier non autorisé : ' . $mime];
+    }
+
+    $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    if (str_starts_with($mime, 'video/')) {
+        $newName = 'vid_' . $originalName . '_' . uniqid() . '.' . $extension;
+    } elseif (str_starts_with($mime, 'image/')) {
+        $newName = 'img_' . $originalName . '_' . uniqid() . '.' . $extension;
+    } else {
+        return ['resultat_upload' => false, 'message' => 'Type de fichier non reconnu.'];
+    }
+
+    if (move_uploaded_file($file['tmp_name'], $uploadDir . $newName)) {
+        return ['resultat_upload' => true, 'message' => 'Fichier uploadé avec succès : ' . $newName];
+    } else {
+        return ['resultat_upload' => false, 'message' => 'Échec du déplacement du fichier.'];
+    }
+}
+
+function ajouter_objet($objet, $categorie, $id_membre){
+    $sql = "INSERT INTO s2fp_objet (nom_objet, id_categorie, id_membre) VALUES ('%s', %d, %d)";
+    $sql = sprintf($sql, $objet, $categorie, $id_membre);
+    mysqli_query(dbconnect(), $sql);
 }
