@@ -79,3 +79,60 @@ function charger_liste_filtree($id_categorie)
     mysqli_free_result($requete);
     return $resultat;
 }
+
+function charger_fiche_objet($id_objet){
+    $sql = "SELECT * 
+            FROM v_s2fp_liste_objets 
+            WHERE id_objet = %d";
+    $sql = sprintf($sql, $id_objet);
+    $requete = mysqli_query(dbconnect(), $sql);
+    if (!$requete) {
+        return false;
+    }
+
+    $resultat = array();
+    while ($fiche = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $fiche;
+    }
+
+    mysqli_free_result($requete);
+    return $resultat;
+}
+
+function charger_histo_emprunts($id_objet){
+    $sql = "SELECT *
+            FROM v_s2fp_liste_emrpunts
+            WHERE id_objet = %d";
+    $sql = sprintf($sql, $id_objet);
+    $requete = mysqli_query(dbconnect(), $sql);
+    if (!$requete) {
+        return false;
+    }
+
+    $resultat = array();
+    while ($fiche = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $fiche;
+    }
+
+    mysqli_free_result($requete);
+    return $resultat;
+}
+
+function charger_fiche_membre($id_membre){
+    $sql = "SELECT *
+            FROM v_s2fp_liste_membre
+            WHERE id_membre = %d";
+    $sql = sprintf($sql, $id_membre);
+    $requete = mysqli_query(dbconnect(), $sql);
+    if (!$requete) {
+        return false;
+    }
+
+    $resultat = array();
+    while ($fiche = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $fiche;
+    }
+
+    mysqli_free_result($requete);
+    return $resultat;
+}

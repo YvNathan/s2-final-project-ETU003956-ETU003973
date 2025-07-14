@@ -1,8 +1,8 @@
 <?php
 require('../include/fonctions.php');
-$objet = $_GET['o'];
-$fiche = charger_fiche_objet($objet);
-$histo = charger_histo_emprunts($objet);
+$membre = $_GET['m'];
+$fiche = charger_fiche_membre($membre);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +15,10 @@ $histo = charger_histo_emprunts($objet);
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <?= $fiche['nom_image']?>
     <?php
-        foreach($histo as $h){?>
-            <?= $h['nom']?> 
-            <?= $h['date_emprunt']?>
-            <?= $h['date_retour']?>
-    <?php }?>
+        foreach($fiche as $f){
+            
+        }
+    ?>
 </body>
 </html>

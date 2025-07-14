@@ -27,6 +27,7 @@ Version 1
 
 Version 2:
     - Amélioration du design:
+        - image pour  
     - Ajout d'un nouvel objet par un membre 
     - Page fiche objet : 
         - image 

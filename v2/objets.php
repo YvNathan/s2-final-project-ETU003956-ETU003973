@@ -76,10 +76,10 @@ $categories = charger_liste_categories();
                                 <img src="../assets/images/<?= $o['nom_image']?>" class="card-img-top" alt="Photo objet" style="height: 200px; object-fit: cover;">
                             </div>
                             <div class="mt-2 position-absolute">
-                                <span class="ms-3 badge bg-primary"><?= $o['nom_categorie'] ?></span>
+                                <span class="ms-3 badge bg-primary"><a href="ficheObjet.php?o=<?= $o['id_objet']?>"><?= $o['nom_categorie'] ?></a></span>
                             </div>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold"><?= $o['nom_objet'] ?></h5>
+                                <h5 class="card-title fw-bold"><a href="ficheObjet.php?o=<?= $o['id_objet']?>"><?= $o['nom_objet'] ?></a></h5>
                                 <p class="card-text text-muted mb-3">
                                     <i class="bi bi-tag"></i> Catégorie: <?= $o['nom_categorie'] ?>
                                 </p>
@@ -107,7 +107,6 @@ $categories = charger_liste_categories();
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
