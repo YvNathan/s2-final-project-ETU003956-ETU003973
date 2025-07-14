@@ -48,10 +48,10 @@ OR REPLACE TABLE s2fp_emprunt (
 
 /* Données */
 INSERT INTO s2fp_membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES
-('Toky Rakoto', '1990-05-12', 'M', 'toky.rakoto@example.mg', 'Antananarivo', 'mdp1', 'toky.jpg'),
-('Fara Rasoanaivo', '1988-07-23', 'F', 'fara.rasoanaivo@example.mg', 'Toamasina', 'mdp2', 'fara.jpg'),
-('Hery Randrianarisoa', '1992-11-04', 'M', 'hery.randria@example.mg', 'Fianarantsoa', 'mdp3', 'hery.jpg'),
-('Soa Andrianantenaina', '1995-02-15', 'F', 'soa.andriana@example.mg', 'Mahajanga', 'mdp4', 'soa.jpg');
+('Toky Rakoto', '1990-05-12', 'M', 'toky.rakoto@gmail.com', 'Antananarivo', 'mdp1', 'toky.jpg'),
+('Fara Rasoanaivo', '1988-07-23', 'F', 'fara.rasoanaivo@gmail.com', 'Toamasina', 'mdp2', 'fara.jpg'),
+('Hery Randrianarisoa', '1992-11-04', 'M', 'hery.randria@gmail.com', 'Fianarantsoa', 'mdp3', 'hery.jpg'),
+('Soa Andrianantenaina', '1995-02-15', 'F', 'soa.andriana@gmail.com', 'Mahajanga', 'mdp4', 'soa.jpg');
 
 INSERT INTO s2fp_categorie_objet (nom_categorie) VALUES
 ('Esthétique'),
@@ -96,12 +96,11 @@ INSERT INTO s2fp_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
 (38, 2, '2025-07-04', '2025-07-18');
 
 CREATE OR REPLACE VIEW v_s2fp_liste_objets AS
-SELECT o.id_objet, o.nom_objet, i.id_categorie, c.nom_categorie, i.id_image, i.nom_image
+SELECT o.id_objet, o.nom_objet, o.id_categorie, c.nom_categorie
 FROM s2fp_objet as o
-JOIN s2fp_categorie_objet as c ON o.id_categorie = c.id_categorie
-JOIN s2fp_image_objet as i ON i.id_objet = o.id_objet;
+JOIN s2fp_categorie_objet as c ON o.id_categorie = c.id_categorie;
 
-CREATE OR REPLACE VIEW v_liste_emprunts as
+CREATE OR REPLACE VIEW v_s2fp_liste_emprunts as
 SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.email, m.image_profil
 FROM s2fp_emprunt as e
 JOIN v_s2fp_liste_objets as o ON e.id_objet = o.id_objet

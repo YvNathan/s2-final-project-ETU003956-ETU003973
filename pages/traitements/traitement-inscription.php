@@ -5,6 +5,7 @@ require("../../include/fonctions.php");
 if(!isset($_POST['email']) || !isset($_POST['mdp']))
 {
     header('Location: ../inscription.php');
+    exit;
 }
 
 $infos = $_POST;
