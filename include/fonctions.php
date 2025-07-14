@@ -238,3 +238,18 @@ function charger_images_objet($id_objet)
     mysqli_free_result($requete);
     return empty($resultat) ? ['default.png'] : $resultat;
 }
+
+
+function rechercher_objet($categorie, $nom, $dispo)
+{
+    $sql = "SELECT *
+            FROM v_s2fp_objets_emprunts
+            WHERE id_categorie = %d and nom_objet = %s and date_emprunt = null";
+    $requete = mysqli_query(dbconnect(), $sql);
+    $resultat = array();
+    while ($employe = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $employe;
+    }
+    mysqli_free_result($requete);
+    return $resultat;
+}

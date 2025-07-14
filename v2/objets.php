@@ -60,6 +60,10 @@ $categories = charger_liste_categories();
             <div class="d-flex justify-content-end mb-4">
                 <a href="traitements/deconnexion.php" class="btn btn-outline-danger">Se déconnecter</a>
             </div>
+
+            <div class="d-flex justify-content-end mb-4">
+                <a href="recherche.php" class="btn btn-outline-secondary">Rechercher</a>
+            </div>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4">

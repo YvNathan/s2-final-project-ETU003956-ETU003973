@@ -1,6 +1,6 @@
 <?php
 require("../include/fonctions.php");
-$categories = rechercher_objet();
+$categories = chargerCategories(); // Fonction pour charger les catégories (à créer séparément)
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,6 +11,7 @@ $categories = rechercher_objet();
     <title>TP-22-DB</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         a {
             text-decoration: none;
@@ -53,15 +54,15 @@ $categories = rechercher_objet();
                 <h2 class="card-title mb-0">Recherche d'Objets</h2>
             </div>
             <div class="card-body">
-                <form action="resultat-recherche.php?" method="POST">
+                <form action="resultat-recherche.php" method="POST">
                     <input type="hidden" name="index" value="0">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="categorie" class="form-label fw-semibold">Catégorie</label>
-                            <select name="categorie" id="categorie" class="form-select">
+                            <select name="categorie" id="categorie" class="form-select" required>
                                 <option value="" selected disabled hidden>-- Sélectionner une catégorie --</option>
                                 <?php foreach ($categories as $c) { ?>
-                                    <option value="<?= $c['cat_id']?>"><?= $c['cat_name']?></option>
+                                    <option value="<?= $c['id_categorie']?>"><?= $c['nom_categorie']?></option>
                                 <?php } ?>
                             </select>
                         </div>
