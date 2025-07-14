@@ -94,3 +94,15 @@ INSERT INTO s2fp_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
 (27, 4, '2025-06-28', '2025-07-12'),
 (19, 1, '2025-07-01', '2025-07-14'),
 (38, 2, '2025-07-04', '2025-07-18');
+
+CREATE OR REPLACE VIEW v_s2fp_liste_objets AS
+SELECT o.id_objet, o.nom_objet, i.id_categorie, c.nom_categorie, i.id_image, i.nom_image
+FROM s2fp_objet as o
+JOIN s2fp_categorie_objet as c ON o.id_categorie = c.id_categorie
+JOIN s2fp_image_objet as i ON i.id_objet = o.id_objet;
+
+CREATE OR REPLACE VIEW v_liste_emprunts as
+SELECT o.*, e.id_emprunt, e.date_emprunt, e.date_retour, m.id_membre, m.nom, m.email, m.image_profil
+FROM s2fp_emprunt as e
+JOIN v_s2fp_liste_objets as o ON e.id_objet = o.id_objet
+JOIN s2fp_membre as m ON e.id_membre = m.id_membre; 
