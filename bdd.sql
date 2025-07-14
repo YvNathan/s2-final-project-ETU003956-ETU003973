@@ -119,7 +119,18 @@ FROM v_s2fp_liste_objets v
 LEFT JOIN v_s2fp_objet_premier_img ipm ON v.id_objet = ipm.id_objet
 LEFT JOIN s2fp_image_objet im ON ipm.id_image = im.id_image;
 
-CREATE OR REPLACE VIEW v_liste_objets_membre as
+CREATE OR REPLACE VIEW v_s2fp_liste_objets_membre as
 SELECT lo.*, m.id_membre, m.nom 
 FROM v_s2fp_liste_objets as lo JOIN s2fp_objet as o ON lo.id_objet = o.id_objet
 JOIN s2fp_membre as m ON o.id_membre = m.id_membre;
+
+CREATE OR REPLACE VIEW v_s2fp_objet_toutes_images AS
+SELECT 
+    o.id_objet,
+    o.nom_objet,
+    o.id_categorie,
+    c.nom_categorie,
+    COALESCE(i.nom_image, 'default.png') as nom_image
+FROM s2fp_objet o
+JOIN s2fp_categorie_objet c ON o.id_categorie = c.id_categorie
+LEFT JOIN s2fp_image_objet i ON o.id_objet = i.id_objet;

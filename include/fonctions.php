@@ -116,22 +116,43 @@ function charger_histo_emprunts($id_objet)
     return $resultat;
 }
 
-function charger_fiche_membre($id_membre)
-{
-    $sql = "SELECT *
-            FROM v_s2fp_liste_objets_membre
-            WHERE id_membre = %d";
+function charger_liste_membres() {
+    $sql = "SELECT * FROM s2fp_membre ORDER BY nom";
+    $requete = mysqli_query(dbconnect(), $sql);
+    $resultat = array();
+    while ($m = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $m;
+    }
+    mysqli_free_result($requete);
+    return $resultat;
+}
+
+function charger_infos_membre($id_membre) {
+    $sql = "SELECT * FROM s2fp_membre WHERE id_membre = %d";
     $sql = sprintf($sql, $id_membre);
     $requete = mysqli_query(dbconnect(), $sql);
     if (!$requete) {
         return false;
     }
+    
+    $resultat = mysqli_fetch_assoc($requete);
+    mysqli_free_result($requete);
+    return $resultat;
+}
 
-    $resultat = array();
-    while ($fiche = mysqli_fetch_assoc($requete)) {
-        $resultat[] = $fiche;
+function charger_emprunts_membre($id_membre) {
+    $sql = "SELECT * FROM v_s2fp_liste_emprunts WHERE id_membre = %d";
+    $sql = sprintf($sql, $id_membre);
+    $requete = mysqli_query(dbconnect(), $sql);
+    if (!$requete) {
+        return array();
     }
-
+    
+    $resultat = array();
+    while ($emprunt = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $emprunt;
+    }
+    
     mysqli_free_result($requete);
     return $resultat;
 }
@@ -177,22 +198,43 @@ function uploadMedia($file, $uploadDir, $allowedMimeTypes)
     }
 }
 
-function ajouter_objet($objet, $categorie, $id_membre){
+function ajouter_objet($objet, $categorie, $id_membre)
+{
     $sql = "INSERT INTO s2fp_objet (nom_objet, id_categorie, id_membre) VALUES ('%s', %d, %d)";
     $sql = sprintf($sql, $objet, $categorie, $id_membre);
     mysqli_query(dbconnect(), $sql);
 }
 
-function ajouter_image($img, $id_objet){
+function ajouter_image($img, $id_objet)
+{
     $sql = "INSERT INTO s2fp_image_objet (id_objet, nom_image) VALUES (%d, '%s')";
     $sql = sprintf($sql, $id_objet, $img);
     mysqli_query(dbconnect(), $sql);
 }
 
-function recuperer_dernier_id(){
+function recuperer_dernier_id()
+{
     $sql = "SELECT LAST_INSERT_ID";
     $requete = mysqli_query(dbconnect(), $sql);
     $resultat = mysqli_fetch_assoc($requete);
     mysqli_free_result($requete);
     return $resultat;
+}
+
+function charger_images_objet($id_objet)
+{
+    $sql = "SELECT nom_image FROM s2fp_image_objet WHERE id_objet = %d";
+    $sql = sprintf($sql, $id_objet);
+    $requete = mysqli_query(dbconnect(), $sql);
+    if (!$requete) {
+        return ['default.png'];
+    }
+
+    $resultat = array();
+    while ($image = mysqli_fetch_assoc($requete)) {
+        $resultat[] = $image['nom_image'];
+    }
+
+    mysqli_free_result($requete);
+    return empty($resultat) ? ['default.png'] : $resultat;
 }
